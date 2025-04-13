@@ -12,6 +12,6 @@ class AppAssets {
   static String forwardIcon = "assets/Button Small2.png";
   static String circularArrowIcon = "assets/Vector.png";
   static String intro = "assets/intro.jpeg";
-  static String soundIcon = "assets/soundIcon.jpeg";
+  static String soundIcon = "assets/soundicon.jpeg";
   static String threefreplan = "assets/threefreeplan.jpeg";
 }

@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="sound_well_app"
+        android:label="TheSoundWell"
         android:name="${applicationName}"
-        android:icon="@mipmap/soundIcon.jpeg">
+        android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
             android:exported="true"
