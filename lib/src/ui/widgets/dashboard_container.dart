@@ -40,11 +40,14 @@ class CustomDashboardContainer extends StatelessWidget {
               child: Container(
                 decoration: const BoxDecoration(
                     color: Colors.black38, shape: BoxShape.circle),
-                child: const Padding(
+                child:  Padding(
                   padding: EdgeInsets.all(10.0),
-                  child: Icon(
-                    Icons.play_arrow,
-                    color: Colors.white,
+                  child: InkWell(
+                    onTap: voidcallback,
+                    child: Icon(
+                      Icons.play_arrow,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
@@ -52,7 +55,7 @@ class CustomDashboardContainer extends StatelessWidget {
           ],
         ),
         SizedBox(
-          height: 10.sp,
+          height: 15.sp,
         ),
         SizedBox(
           width: 38.w,

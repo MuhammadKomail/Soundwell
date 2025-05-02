@@ -55,9 +55,8 @@ class FreeSounds extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    Padding(
-                      /* 4% of screen width */
-                      padding: EdgeInsets.all(4.w),
+                    Container(
+                      margin: EdgeInsets.only(left: 0,top: 10),
                       child: IconButton(
                         onPressed: () {
                           Get.to(

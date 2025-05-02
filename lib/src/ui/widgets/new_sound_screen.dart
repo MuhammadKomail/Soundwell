@@ -95,122 +95,106 @@ class _NewSoundScreenState extends State<NewSoundScreen> {
     return Scaffold(
       backgroundColor: AppColors.themeColor,
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(14.sp),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.all(16.0),
-                      child: IconButton(
-                        onPressed: () {
-                          _player.stop();
-                          Get.to(DashboardScreen());
-                        },
-                        icon: Icon(Icons.arrow_back_ios),
-                        color: Colors.white,
-                      ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: 10,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      _player.stop();
+                      Get.to(DashboardScreen());
+                    },
+                    icon: Icon(Icons.arrow_back_ios),
+                    color: Colors.white,
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(right: 10),
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.grey
                     ),
-                    Spacer(),
-                    Container(
-                      width: 28.w,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: AppColors.primaryBlueDark),
-                      ),
-                      child: Row(
-                        children: [
-                          Image.asset(
-                            AppAssets.circularArrowIcon,
-                            width: 10.w,
-                          ),
-                          CustomText(
-                            text: widget.selectedValue,
-                            fontWeight: FontWeight.bold,
-                          )
-                        ],
-                      ),
+                    child: Text("Reload",style: TextStyle(color: Colors.white),),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 4.h,
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: SizedBox(
+                  width: 38.w,
+                  height: 20.h,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: Image.asset(
+                      widget.image,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 3.h,
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: CustomText(
+                  textAlign: TextAlign.center,
+                  text: widget.text,
+                  fontsize: 24.sp,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(
+                height: 4.h,
+              ),
+              Padding(
+                padding: EdgeInsets.all(8.sp),
+                child: Column(
+                  children: [
+                    StreamBuilder<Duration>(
+                      stream: _player.positionStream,
+                      builder: (context, snapshot) {
+                        var position = snapshot.data ?? Duration.zero;
+                        return Column(
+                          children: [
+                            StreamBuilder<PositionData>(
+                              stream: _positionDataStream,
+                              builder: (context, snapshot) {
+                                final positionData = snapshot.data;
+                                return SeekBar(
+                                  duration:
+                                      positionData?.duration ?? Duration.zero,
+                                  position:
+                                      positionData?.position ?? Duration.zero,
+                                  bufferedPosition:
+                                      positionData?.bufferedPosition ??
+                                          Duration.zero,
+                                  onChangeEnd: _player.seek,
+                                );
+                              },
+                            ),
+                            SizedBox(height: 3.h),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(width: 5.sp),
+                                ControlButtons(_player),
+                              ],
+                            ),
+                          ],
+                        );
+                      },
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 4.h,
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: SizedBox(
-                    width: 38.w,
-                    height: 20.h,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: Image.asset(
-                        widget.image,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 3.h,
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: CustomText(
-                    textAlign: TextAlign.center,
-                    text: widget.text,
-                    fontsize: 24.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(
-                  height: 4.h,
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.sp),
-                  child: Column(
-                    children: [
-                      StreamBuilder<Duration>(
-                        stream: _player.positionStream,
-                        builder: (context, snapshot) {
-                          var position = snapshot.data ?? Duration.zero;
-                          return Column(
-                            children: [
-                              StreamBuilder<PositionData>(
-                                stream: _positionDataStream,
-                                builder: (context, snapshot) {
-                                  final positionData = snapshot.data;
-                                  return SeekBar(
-                                    duration:
-                                        positionData?.duration ?? Duration.zero,
-                                    position:
-                                        positionData?.position ?? Duration.zero,
-                                    bufferedPosition:
-                                        positionData?.bufferedPosition ??
-                                            Duration.zero,
-                                    onChangeEnd: _player.seek,
-                                  );
-                                },
-                              ),
-                              SizedBox(height: 3.h),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SizedBox(width: 5.sp),
-                                  ControlButtons(_player),
-                                ],
-                              ),
-                            ],
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

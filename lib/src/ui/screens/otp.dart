@@ -32,6 +32,7 @@ class _OtpPageState extends State<OtpPage> {
     String otp = _controllers.map((controller) => controller.text).join();
     if (otp.length == 8) {
       var logger = Logger();
+      print(otp);
       Get.dialog(
         Center(
           child: CircularProgressIndicator(

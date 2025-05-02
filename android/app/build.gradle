@@ -13,7 +13,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace = "com.example.sound_well_app"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 35
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -28,7 +28,7 @@ android {
         // Specify your unique Application ID
         applicationId = "com.thesoundwell"
         minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
+        targetSdk = 35
         versionCode = 26
         versionName = "26.0.1"
     }
