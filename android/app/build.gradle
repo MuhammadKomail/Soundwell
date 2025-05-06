@@ -29,8 +29,8 @@ android {
         applicationId = "com.thesoundwell"
         minSdk = flutter.minSdkVersion
         targetSdk = 35
-        versionCode = 26
-        versionName = "26.0.1"
+        versionCode = 27
+        versionName = "26.0.2"
     }
 
     signingConfigs{

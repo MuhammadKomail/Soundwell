@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sound_well_app/src/ui/screens/otp.dart';
 import 'package:sound_well_app/src/utils/app_assets.dart';
 import 'package:sound_well_app/src/controller/login_controller.dart';
@@ -49,6 +50,31 @@ class _LogInState extends State<LogIn> {
     }
 
     return deviceId;
+  }
+
+  Future<void> _initInfo() async {
+    final logger = Logger();
+
+    try {
+      final deviceId = await getDeviceId();
+      final packageInfo = await PackageInfo.fromPlatform();
+
+      final version = packageInfo.version;
+      final buildNumber = packageInfo.buildNumber;
+
+      logger.i('Device ID: $deviceId');
+      logger.i('App Version: $version ($buildNumber)');
+    } catch (e) {
+      logger.e('Failed to fetch init info: $e');
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _initInfo();
+
   }
 
   @override
