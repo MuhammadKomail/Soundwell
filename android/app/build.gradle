@@ -29,7 +29,7 @@ android {
         applicationId = "com.thesoundwell"
         minSdk = flutter.minSdkVersion
         targetSdk = 35
-        versionCode = 27
+        versionCode = 28
         versionName = "26.0.2"
     }
 
